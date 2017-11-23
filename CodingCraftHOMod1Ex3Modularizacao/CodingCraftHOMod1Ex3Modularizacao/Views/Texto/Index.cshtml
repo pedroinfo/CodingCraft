@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex3Modularizacao.Dominio.Models.Texto>
+
+@{
+    ViewBag.Title = "Produção de texto";
+}
+
+<h2>Produção de texto</h2>
+
+<p>
+    @Html.ActionLink("Criar novo texto", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Curso.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataHoraTexto)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Curso.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataHoraTexto)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.TextoId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.TextoId }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.TextoId })
+        </td>
+    </tr>
+}
+
+</table>

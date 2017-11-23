@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex7Redis.Models.Imovel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listagem de Imóveis</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.ImovelId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.ImovelId }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.ImovelId })
+        </td>
+    </tr>
+}
+
+</table>

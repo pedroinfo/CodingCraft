@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex7Redis.Models.Produto>
+
+@{
+    ViewBag.Title = "Listagem de produtos";
+}
+
+<h2>Listagem de produtos</h2>
+
+<p>
+    @Html.ActionLink("Novo Produto", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.PageProdutos)
+    {
+        <tr>
+            <td>@item.Nome</td>
+            <td>@item.Preco</td>
+            <td>@item.Categoria.Nome</td>
+            <td>
+
+                <button onclick="location.href='@Url.Action("Edit", new { id = item.ProdutoId})';return false;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit">
+                        Editar
+                    </span>
+                </button>
+
+                <button onclick="location.href='@Url.Action("Details", new { id = item.ProdutoId})';return false;" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign">
+                        Detalhes
+                    </span>
+                </button>
+
+                <button name="excluir" id=@item.ProdutoId onclick="location.href='@Url.Action("Delete", new { id = item.ProdutoId})';return false;" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash red">
+                        Excluir
+                    </span>
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

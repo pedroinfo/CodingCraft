@@ -1,0 +1,36 @@
+@model EX2.Models.Cliente
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.NomeFantasia)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.NomeFantasia)
+    @Html.ValidationMessageFor(model => model.NomeFantasia) 
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.RazaoSocial)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.RazaoSocial)
+    @Html.ValidationMessageFor(model => model.RazaoSocial)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Cnpj)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Cnpj)
+    @Html.ValidationMessageFor(model => model.Cnpj)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.DataAbertura)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.DataAbertura)
+    @Html.ValidationMessageFor(model => model.DataAbertura)
+</div>
+

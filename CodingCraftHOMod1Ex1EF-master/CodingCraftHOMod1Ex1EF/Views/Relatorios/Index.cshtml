@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex1EF.Models.Vendas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Relatório de Vendas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCompra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto.Preco)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ValorVenda)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Produto.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCompra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Produto.Preco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorVenda)
+        </td>
+
+    </tr>
+}
+
+</table>

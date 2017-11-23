@@ -1,0 +1,48 @@
+﻿@model CodingCraftHOMod1Ex1EF.Models.Estoque
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir Registro no Estoque</h2>
+
+<h3>Deseja excluir esse registro ?</h3>
+<div>
+    <h4>Estoque</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Loja.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loja.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Produto.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Produto.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>

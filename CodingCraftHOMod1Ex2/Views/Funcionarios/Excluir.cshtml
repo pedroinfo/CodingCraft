@@ -1,0 +1,26 @@
+@model EX2.Models.Funcionario
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir</h2>
+
+<h3>Deseja excluir esse registro ?</h3>
+<fieldset>
+    <legend>Funcionario</legend>
+
+    <div class="display-label">Nome</div>
+    <div class="display-field">@Model.Nome</div>
+
+    <div class="display-label">Cargo</div>
+    <div class="display-field">@Model.Cargo</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Excluir" /> |
+        @Html.ActionLink("Voltar", "Index")
+    </p>
+}
+
+

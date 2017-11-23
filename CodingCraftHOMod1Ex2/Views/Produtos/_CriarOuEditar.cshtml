@@ -1,0 +1,12 @@
+@model EX2.Models.Produto
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Nome)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Nome)
+    @Html.ValidationMessageFor(model => model.Nome)
+</div>
+

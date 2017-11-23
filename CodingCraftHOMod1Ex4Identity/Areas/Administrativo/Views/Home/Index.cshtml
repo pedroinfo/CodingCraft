@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Administração do Sistema";
+}
+
+<h2>Administração do Sistema</h2>
+
+<div class="row">
+    <ul>
+        <li>
+            @Html.ActionLink("Controle de Usuários", "Index", "Usuarios")
+        </li>
+
+        <li>
+            @Html.ActionLink("Grupos do Sistema", "Index", "Grupos")
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,41 @@
+@model IEnumerable<EX2.Models.Funcionario>
+
+@{
+    ViewBag.Title = "Indice";
+}
+
+<h2>Indice</h2>
+
+<p>
+    @Html.ActionLink("Criar novo", "Criar")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Nome
+        </th>
+        <th>
+            Cargo
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.FuncionarioId }) |
+            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.FuncionarioId }) |
+            @Html.ActionLink("Excluir", "Excluir", new { id=item.FuncionarioId })
+        </td>
+        <td>
+			@item.Nome
+        </td>
+        <td>
+			@item.Cargo
+        </td>
+    </tr>
+}
+
+</table>
+
+

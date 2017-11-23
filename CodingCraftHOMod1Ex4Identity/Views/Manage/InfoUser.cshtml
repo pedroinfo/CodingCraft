@@ -1,0 +1,37 @@
+﻿@model CodingCraftHOMod1Ex4Identity.ViewModels.ClaimsViewModel
+@{
+    ViewBag.Title = "Informações do usuário";
+}
+
+<h2>Informações do usuário</h2>
+
+<hr />
+
+@using (Html.BeginForm("ClaimsUpdate", "Manage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Desenvolvedor, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.Desenvolvedor, new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UsuarioPremium, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(x => x.UsuarioPremium, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Gravar" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}

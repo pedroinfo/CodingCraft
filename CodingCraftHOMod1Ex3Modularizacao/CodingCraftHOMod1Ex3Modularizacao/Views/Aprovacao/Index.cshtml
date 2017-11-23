@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex3Modularizacao.Dominio.Models.Texto>
+
+@{
+    ViewBag.Title = "Aprovação";
+}
+
+<h2>Aprovação</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Curso.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataHoraTexto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Revisado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aprovado)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Curso.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataHoraTexto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Revisado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aprovado)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.TextoId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.TextoId }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.TextoId }) |
+            <a name="ConcluirAprovacao" href=@item.TextoId>Concluir Aprovação</a>
+        </td>
+    </tr>
+}
+
+</table>
+@section Scripts{
+<script> 
+
+    $(document).ready(function () {
+
+        $('a[name=ConcluirAprovacao]').on('click', function (e) {
+            e.preventDefault();
+            var textoId = $(this).attr('href');
+
+
+            var jqxhr = $.post("Aprovacao/ConcluirAprovacao/", { id: textoId }, function () {
+                
+            })
+                .done(function () {
+                    alert("successo");
+                    location.reload(true);
+                })
+                .fail(function () {
+                    alert("error");
+                })
+                .always(function () {
+                    //alert("finished");
+                });
+        });
+        
+    })
+</script>
+ }

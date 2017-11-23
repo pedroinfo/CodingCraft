@@ -1,0 +1,42 @@
+﻿@model CodingCraftHOMod1Ex3Modularizacao.Dominio.Models.Texto
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Texto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Conteudo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Conteudo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataHoraTexto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataHoraTexto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.TextoId }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

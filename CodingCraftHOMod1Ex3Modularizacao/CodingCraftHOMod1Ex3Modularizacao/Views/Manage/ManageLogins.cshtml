@@ -1,0 +1,24 @@
+﻿
+@model IEnumerable<CodingCraftHOMod1Ex3Modularizacao.Mvc.Comum.ViewModels.UsLogi>
+<div class="row">
+    <h4>Users</h4>
+
+    @foreach (var user in Model)
+    {
+        <p>
+            <strong>
+                @user.Username | @user.Email | @user.Role
+            </strong>
+        </p>
+    }
+</div>
+
+@using Microsoft.Owin.Security
+@{
+    ViewBag.Title = "Gerenciar seus usuários";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+

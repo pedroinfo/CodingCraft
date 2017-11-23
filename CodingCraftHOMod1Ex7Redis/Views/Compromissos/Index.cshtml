@@ -1,0 +1,160 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex7Redis.Models.Compromisso>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listagem de compromissos</h2>
+
+<p>
+    @Html.ActionLink("Novo Compromisso", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="form-group">
+
+    @Html.Label("Pesquisar", "Pesquisar")
+    <br />
+
+    <div class="col-md-2">
+        <div id="bloodhound">
+            @Html.TextBox("Consulta", null, new { @class = "form-control typeahead" })
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+    </div>
+</div>
+
+<br /><br />
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataHora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Local)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in ViewBag.PageCompromissos)
+    {
+        <tr>
+            <td>@item.Titulo</td>
+            <td>@item.DataHora</td>
+            <td>@item.Local</td>
+            <td>
+
+                <button onclick="location.href='@Url.Action("Edit", new { id = item.CompromissoId})';return false;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit">
+                        Editar
+                    </span>
+                </button>
+
+
+                <button onclick="location.href='@Url.Action("Details", new { id = item.CompromissoId})';return false;" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign">
+                        Detalhes
+                    </span>
+                </button>
+
+
+
+                <button name="excluir" id=@item.CompromissoId onclick="location.href='@Url.Action("Delete", new { id = item.CompromissoId})';return false;" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash red">
+                        Excluir
+                    </span>
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@Html.PagedListPager((IPagedList)ViewBag.PageCompromissos, page => Url.Action("Index", new { page }))
+
+@section Scripts{
+   
+
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+
+            $("btn[name='excluir']").on("click", function (e) {
+
+                var id = $(this).attr('id');
+
+                swal({
+                    title: "Deseja excluir esse registro ?",
+                    text: "Apagar registro",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Sim, realizar exclusão!",
+                    cancelButtonText: "Não, cancelar exclusão",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/Compromisso/Delete/" + id,
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function () { },
+                                error: function () { }
+                            });
+
+                            swal("Excluído!", "Registro excluído com sucesso !", "success");
+                            location.reload();
+                        }
+                    });
+
+            });
+
+            var states2 = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+                'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+                'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+                'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+                'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+                'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+                'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+                'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+                'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+            ];
+
+            var states = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                // `states` is an array of state names defined in "The Basics"
+                local: states2
+            });
+
+            $('#bloodhound .typeahead').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+                {
+                    name: 'states',
+                    source: states2
+                });
+          
+        });
+
+    </script>
+} 

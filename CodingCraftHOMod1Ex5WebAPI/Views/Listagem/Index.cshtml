@@ -1,0 +1,579 @@
+﻿<link href="~/Content/jsgrid.min.css" rel="stylesheet" />
+<link href="~/Content/jsgrid-theme.min.css" rel="stylesheet" />
+<link href="~/Content/sweetalert.css" rel="stylesheet" />
+<link href="http://vjs.zencdn.net/6.2.7/video-js.css" rel="stylesheet">
+
+@{
+    ViewBag.Title = "Listagem de arquivos e upload de arquivos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+
+<form id="frmUpload" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Upload de arquivos</legend>
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="custom-file">
+                    <input type="file" id="file" class="custom-file-input">
+                    <span class="custom-file-control"></span>
+                </label>
+
+                <div class="form-group">
+                    <label for="NomeArquivo">Nome do arquivo</label>
+                    <input type="text" class="form-control" id="NomeArquivo" name="NomeArquivo" />
+                </div>
+                <input type="button" id="btnGravar" value="Gravar" class="btn btn-primary" />
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<br />
+
+<div id="jsGrid"></div>
+
+
+<input type="hidden" id="conteudoJson" value="" />
+<button id="btnSaidaXml" class="btn btn-primary">Saída XML</button>
+<button id="btnSaidaJson" class="btn btn-primary">Saída JSON</button>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="modalModificarLabel" aria-hidden="true">
+    <form enctype="multipart/form-data">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalModificarLabel">Modificar versão do arquivo</h5>
+
+                    <input type="hidden" id="arquivoIdModificar" />
+                    <input type="hidden" id="ArquivoTipoId" value="9" />
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label class="custom-file">
+                        <input type="file" id="fileModificar" class="custom-file-input">
+                        <span class="custom-file-control"></span>
+                    </label>
+                    <div class="form-group">
+                        <label for="NomeArquivoModificar">Nome do arquivo</label>
+                        <input type="text" class="form-control" id="NomeArquivoModificar" name="NomeArquivoModificar" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btnGravarModificacao" class="btn btn-primary">Gravar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Versões -->
+<div class="modal fade" id="modalVersoes" tabindex="-1" role="dialog" aria-labelledby="modalVersoesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVersoesLabel">Versões do arquivo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="gridVersoes"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="btnGravarModificacao" class="btn btn-primary">Gravar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Streaming -->
+
+<div class="modal fade" id="modalStreaming" tabindex="-1" role="dialog" aria-labelledby="modalStreamingLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalStreamingLabel">Versões do arquivo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <video id="video" class="video-js"  width="480" height="320" controls="controls">
+                    <source id="sourceVideo" type="video/mp4">
+                </video>
+
+            </div>
+            <div class="modal-footer">
+           
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Audio -->
+<div class="modal fade" id="modalAudio" tabindex="-1" role="dialog" aria-labelledby="modalAudioLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAudioLabel">Versões do arquivo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <audio id="audio" class="video-js vjs-default-skin" controls width="480" height="320">
+                    <source id="sourceAudio" type='audio/mp3' />
+                </audio>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="container"></div>
+@section Scripts
+{
+
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    <script src="http://vjs.zencdn.net/6.2.7/video.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            loadgrid();
+        });
+
+        function modificarArquivo(id) {
+            $('#modalModificar').modal('show');
+            $('#arquivoIdModificar').val(id);
+        }
+
+        function versoesArquivo(id) {
+            loadGridVersoes(id);
+            $('#modalVersoes').modal('show');
+        }
+
+        function abrirPlayer(path, tipoArquivo) {
+
+            
+            if (tipoArquivo == "audio") {
+                $('#modalAudio').modal('show');
+
+                $('#modalAudio').on('hidden.bs.modal', function () {
+
+                    $("#audio")[0].player.pause();
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "/api/audios/" + path + "/",
+                    success: function (result) {
+
+                        $('#sourceAudio').attr('src', "/api/audios/" + path + "/");
+
+                        $('audio').attr('src', "/api/audios/" + path + "/");
+
+                        videojs(document.getElementById("audio"), {}, function () {
+
+                        });
+                    },
+                    error: function (result) {
+
+                    }
+                });
+            }
+
+            else if (tipoArquivo == "video") {
+
+                $('#modalStreaming').modal('show');
+
+                $('#modalStreaming').on('hidden.bs.modal', function () {
+                    $("#video")[0].player.pause();
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "/api/videos/" + path + "/",
+                    success: function (result) {
+
+                        $('#sourceVideo').attr('src', "/api/videos/" + path + "/");
+
+                        $('video').attr('src', "/api/videos/" + path + "/");
+
+                        videojs(document.getElementById("video"), {}, function () {
+
+                        });
+                    },
+                    error: function (result) {
+
+                    }
+                });
+            }
+
+            else {
+                swal("Atenção", "Para utilizar o streaming apenas audio/video são permitidos.", "warning");
+                return;
+            }
+        }
+
+        function getCustomInsertHeader(text) {
+            return $("<label>").attr("type", "label").text(text).addClass("");
+        }
+
+        function loadgrid() {
+            $.ajax({
+                type: "GET",
+                url: "/api/arquivos"
+            }).done(function () {
+                $("#jsGrid").jsGrid({
+                    height: "450px",
+                    width: "100%",
+                    filtering: false,
+                    sorting: true,
+                    paging: true,
+                    autoload: true,
+                    pageSize: 10,
+                    pageButtonCount: 5,
+                    deleteConfirm: "Deseja excluir esse item?",
+                    controller: {
+                        loadData: function (filter) {
+                            return $.ajax({
+                                type: "GET",
+                                url: "/api/arquivos",
+                                data: filter
+                            });
+                        },
+                    },
+                    fields: [ 
+                        { name: "ArquivoId", type: "hidden", title: "Id" },
+                        { name: "NomeArquivo", title: "Nome do arquivo", type: "text", width: 150 },
+                        { name: "ArquivoTipo.Descricao", title: "Tipo", type: "text", width: 50 },
+                        {
+                            type: "control", width: 30,
+                            headerTemplate: function () { return getCustomInsertHeader("Excluir") },
+                            itemTemplate: function (value, item) {
+                                var $text = $("<p>").text(item.MyField);
+                                var $link = $("<a>").attr("href", item.MyItemUrl).text("Excluir")
+                                .click(function (e) {
+
+                                    var excluir = $
+                                    swal({
+                                        title: "Deseja excluir esse arquivo ?",
+                                        text: "Após excluir não será possível recuperar o arquivo !",
+                                        type: "warning",
+                                        showCancelButton: true,
+                                        cancelButtonText: "Não",
+                                        confirmButtonColor: "#DD6B55",
+                                        confirmButtonText: "Excluir !",
+                                        closeOnConfirm: false
+                                    },
+                                    function (isConfirm) {
+                                        if (isConfirm) {
+                                            $.ajax({
+                                                type: "DELETE",
+                                                url: "/api/arquivos/" + item.ArquivoId,
+                                                success: function () {
+                                                    swal("Excluido!", "Arquivo excluido com sucesso.", "success");
+                                                    loadgrid();
+                                                },
+                                                error: function (req, status, err) {
+                                                    swal("Atenção", "Falha ao excluir", "warning");
+                                                    console.log('Falha ao excluir...', status, err);
+                                                }
+
+                                            });
+                                        }
+                                    });
+                                });
+                                return $("<div>").append($text).append($link);
+                            }
+                        },
+                        {
+                            type: "control", width: 38,
+                            headerTemplate: function () { return getCustomInsertHeader("Download") },
+                            itemTemplate: function (value, item) {
+                                var $text = $("<p>").text(item.MyField);
+                                var $link = $("<a>").attr("href", item.MyItemUrl).text("Download")
+                                .click(function (e) {
+                                    window.location.href = "@Url.Action("Download", "api/arquivos")" + "/" + item.ArquivoId;
+                                    e.stopPropagation();
+                                });
+
+                                return $("<div>").append($text).append($link);
+                            }
+                        },
+                        {
+                            type: "control", width: 30,
+                            headerTemplate: function () { return getCustomInsertHeader("Modificar") },
+                            itemTemplate: function (value, item) {
+                                var $text = $("<p>").text(item.MyField);
+                                var $link = $("<a>").attr("href", item.modificar).text("Modificar")
+                                .click(function (e) {
+                                        
+                                    modificarArquivo(item.ArquivoId);
+                                        
+                                });
+
+                                return $("<div>").append($text).append($link);
+                            }
+                        },
+                        {
+                            type: "control", width: 30,
+                            headerTemplate: function () { return getCustomInsertHeader("Versões") },
+                            itemTemplate: function (value, item) {
+                                var $text = $("<p>").text(item.MyField);
+                                var $link = $("<a>").attr("href", item.MyItemUrl).text("Versões")
+                                .click(function (e) {
+                                    versoesArquivo(item.ArquivoId);
+
+                                    e.stopPropagation();
+                                });
+                                return $("<div>").append($text).append($link);
+                            }
+                        },
+                        {
+                            type: "control", width: 30,
+                            headerTemplate: function () { return getCustomInsertHeader("Streaming") },
+                            itemTemplate: function (value, item) {
+                                var $text = $("<p>").text(item.MyField);
+                                var $link = $("<a>").attr("href", item.MyItemUrl).text("Streaming")
+                                .click(function (e) {
+                                    abrirPlayer(item.Path, item.ArquivoTipo.Descricao)
+                                    e.stopPropagation();
+                                });
+                                return $("<div>").append($text).append($link);
+                            }
+                        }
+
+                    ]
+                });
+            });
+        }
+
+
+        function loadGridVersoes(id) {
+            $.ajax({
+                type: "GET",
+                url: "/api/arquivos/versoes/" + id
+            }).done(function () {
+                $("#gridVersoes").jsGrid({
+                    height: "450px",
+                    width: "100%",
+                    filtering: false,
+                    sorting: true,
+                    paging: true,
+                    autoload: true,
+                    pageSize: 10,
+                    pageButtonCount: 5,
+                    deleteConfirm: "Deseja excluir esse item?",
+                    controller: {
+                        loadData: function (filter) {
+                            return $.ajax({
+                                type: "GET",
+                                url: "/api/arquivos/versoes/" + id,
+                                data: filter
+                            });
+                        },
+                    },
+                    fields: [
+                        { name: "ArquivoId", type: "hidden", title: "Id", width: 20 },
+                        { name: "NomeArquivo", title: "Nome do arquivo", type: "text", width: 100 },
+                        { name: "ArquivoTipo.Descricao", title: "Tipo", type: "text", width: 70 },
+                        { name: "DataEntrada", title: "Data", type: "text", width: 80},
+                        {
+                            type: "control", width: 38,
+                            headerTemplate: function () { return getCustomInsertHeader("Download") },
+                            itemTemplate: function (value, item) {
+                                var $text = $("<p>").text(item.MyField);
+                                var $link = $("<a>").attr("href", item.MyItemUrl).text("Download")
+                                .click(function (e) {
+                                    window.location.href = "@Url.Action("Download", "api/arquivos")" + "/" + item.ArquivoId;
+                                    e.stopPropagation();
+                                });
+
+                                return $("<div>").append($text).append($link);
+                            }
+                        },
+                    ]
+                });
+            });
+        }
+    </script>
+
+    
+    <script>
+        
+        $('#btnGravarModificacao').on('click', function () {
+            if ($('#fileModificar').get(0).files.length === 0) {
+                swal("Atenção", "Selecione o arquivo para fazer o upload", "warning");
+                return;
+            }
+            if ($('#NomeArquivoModificar').val() === "") {
+                swal("Atenção", "Preencha o nome do arquivo", "warning");
+                return;
+            }
+
+            var data = new FormData()
+            var files = $("#fileModificar").get(0).files;
+
+            if (files.length > 0) {
+                data.append("UploadedImage", files[0]);
+            }
+
+            data.append("ArquivoId", $('#arquivoIdModificar').val());
+            data.append("ArquivoTipoId", $("#ArquivoTipoId").val());
+            data.append("NomeArquivo", $('#NomeArquivoModificar').val());
+
+            var ajaxRequest = $.ajax({
+                type: "PUT",
+                url: "/api/Arquivos/" + $('#arquivoIdModificar').val(),
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (resp) {
+
+                    swal("Atualização realizada", "Arquivo atualizado com sucesso!", "success")
+
+                    $('#fileModificar').val('');
+                    $('#NomeArquivoModificar').val('');
+
+                    $('#modalModificar').modal('hide');
+                    loadgrid();
+                },
+                error: function (req, status, err) {
+                    swal("Atenção", "Erro ao fazer upload", "warning");
+                    console.log('Erro ao fazer upload...', status, err);
+                }
+            });
+
+        });
+        
+        $("#btnGravar").on('click', function () {
+
+            
+            if ($('#file').get(0).files.length === 0) {
+                swal("Atenção", "Selecione o arquivo para fazer o upload", "warning");
+                return;
+            }
+            if ($('#NomeArquivo').val() === "") {
+                swal("Atenção", "Preencha o nome do arquivo", "warning");
+                return;
+            }
+
+            var data = new FormData()
+            var files = $("#file").get(0).files;
+
+            if (files.length > 0) {
+                data.append("UploadedImage", files[0]);
+            }
+
+            data.append("NomeArquivo", $('#NomeArquivo').val());
+
+
+            var ajaxRequest = $.ajax({
+                type: "POST",
+                url: "/api/Arquivos",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (resp) {
+
+                    swal("Sucesso", "Arquivo gravado com sucesso", "success");
+
+                    $('#file').val('');
+                    $('#NomeArquivo').val('');
+
+                    loadgrid();
+                },
+                error: function (req, status, err) {
+                    swal("Atenção", "Erro ao fazer upload", "warning");
+                    console.log('Erro ao fazer upload...', status, err);
+                }
+            });
+        });
+
+        $('#btnSaidaXml').on('click', function (event) {
+            event.preventDefault();
+
+           
+            $(function () {
+                $.ajax({
+                    type: "get",
+                    url: "/api/arquivos",
+                    contentType: "application/xml",
+                    accepts: "application/xml; charset=utf-8",
+                    success: function (data) {
+
+                        var xml = "application/xml;charset=utf-8," + encodeURIComponent(data[0]);
+                        console.log(xml);
+                        var a = document.createElement('a');
+                        a.id = "hiddenXml";
+                        a.style.display = 'none';
+                        a.href = 'data:' + xml;
+                        a.download = 'data.xml';
+                        a.innerHTML = 'download XML';
+
+                        var container = document.getElementById('container');
+                        container.appendChild(a);
+                        a.click();
+                        container.removeChild(a);
+
+                        
+                    },
+                    error: function (xhr, status) {
+                        console.log('erro');
+                        $("#container").html(status);
+                    }
+                });
+            });
+
+        });
+
+        $('#btnSaidaJson').on('click', function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: "GET",
+                url: "/api/arquivos",
+                contentType: "application/json",
+            }).done(function (dados) {
+                
+                var json = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dados));
+
+                var a = document.createElement('a');
+                a.id = "hiddenJsonTemp";
+                a.style.display = 'none';
+                a.href = 'data:' + json;
+                a.download = 'data.json';
+                a.innerHTML = 'download JSON';
+
+                var container = document.getElementById('container');
+                container.appendChild(a);
+                a.click();
+                container.removeChild(a);
+            });
+        });
+    </script>
+
+}

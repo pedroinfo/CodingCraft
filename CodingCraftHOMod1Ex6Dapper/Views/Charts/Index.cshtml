@@ -1,0 +1,94 @@
+﻿@model CodingCraftHOMod1Ex6Dapper.ViewModels.PesquisaViewModel
+
+@{
+    ViewBag.Title = "Gráficos";
+}
+
+<h2>Gráficos</h2>
+
+@Styles.Render("~/Content/bootstrap-datepicker.min.css")
+
+@using (Html.BeginForm("Index", "Charts", FormMethod.Get))
+{
+    @Html.Partial("_PesquisaPartial", Model)
+}
+
+
+@if (Model.Resultados != null)
+{
+    <div class="col-md-6">
+        <canvas id="bar-chart"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="bar-chart-horizontal"></canvas>
+    </div>
+
+}
+
+@section Scripts
+{
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/Chart.min.js"></script>
+
+    <script>
+        $('.datepicker').datepicker({
+            minViewMode: 2,
+            format: 'yyyy',
+            autoclose: true
+        });
+    </script>
+
+
+
+    <script>
+
+        if (document.getElementById("bar-chart")) {
+
+            new Chart(document.getElementById("bar-chart"), {
+                type: 'bar',
+                data: {
+                    labels: @Html.Raw(Json.Encode(@ViewBag.Keys)),
+                    datasets: [
+                      {
+                          label: "Agricultura",
+                          backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                          data: @Html.Raw(Json.Encode(@ViewBag.Values)),
+                      }
+                    ]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Agricultura'
+                    }
+                }
+            });
+        }
+
+
+        if (document.getElementById("bar-chart-horizontal")) {
+            new Chart(document.getElementById("bar-chart-horizontal"), {
+                type: 'horizontalBar',
+                data: {
+                    labels: @Html.Raw(Json.Encode(@ViewBag.Keys)),
+                    datasets: [
+                      {
+                          label: "Agricultura",
+                          backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                          data:  @Html.Raw(Json.Encode(@ViewBag.Values)),
+                      }
+                    ]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Agricultura'
+                    }
+                }
+            });
+        }
+
+</script>
+}

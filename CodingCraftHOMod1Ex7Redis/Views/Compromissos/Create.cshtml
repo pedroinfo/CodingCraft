@@ -1,0 +1,71 @@
+﻿@model CodingCraftHOMod1Ex7Redis.Models.Compromisso
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Novo compromisso</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-12">
+        <div class="form-horizontal">
+            <h4>Compromisso</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label" })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.DataHora, htmlAttributes: new { @class = "control-label" })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(model => model.DataHora, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DataHora, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Local, htmlAttributes: new { @class = "control-label" })
+            </div>
+
+            <div class="row">
+                @Html.EditorFor(model => model.Local, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Local, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Observacoes, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="row">
+                @Html.EditorFor(model => model.Observacoes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Observacoes, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div class="row">
+                
+                
+                    <a href="@Request.UrlReferrer" class="btn btn-default" title="Back to list">
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Voltar
+                    </a>
+                
+                <button type="submit" class="btn btn-success"> Gravar </button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex4Identity.Models.Grupo>
+
+@{
+    ViewBag.Title = "Grupos";
+}
+
+<h2>Cadastro de Grupos</h2>
+
+<p>
+    @Html.ActionLink("Criar", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Grupo")
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Acesso Premium";
+}
+
+<h2>Acesso Premium</h2>
+
+<hr />
+
+@if (ViewBag.AcessoAutorizado)
+{
+    <div class="alert alert-success">
+        <strong>Successo</strong> Acesso autorizado...
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Atenção!</strong> Acesso não autorizado !
+    </div>
+}
+
+@using (@Html.BeginForm("Index", "Premium", FormMethod.Post))
+{
+    <div class="col-md-offset-0">
+        @Html.Label("Confirme sua palavra chave para acesso")
+
+        @Html.TextBox("claim")
+        <input type="submit" value="Acessar" class="btn btn-primary" />
+    </div>
+}
+

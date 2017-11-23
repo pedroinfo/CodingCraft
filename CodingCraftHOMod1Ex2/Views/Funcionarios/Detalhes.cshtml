@@ -1,0 +1,23 @@
+@model EX2.Models.Funcionario
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<fieldset>
+    <legend>Funcionario</legend>
+
+    <div class="display-label">Nome</div>
+    <div class="display-field">@Model.Nome</div>
+
+    <div class="display-label">Cargo</div>
+    <div class="display-field">@Model.Cargo</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id=Model.FuncionarioId }) |
+    @Html.ActionLink("Voltar", "Indice")
+</p>
+
+

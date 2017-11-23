@@ -1,0 +1,86 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex7Redis.Models.Empresa>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listagem de Empresas</h2>
+
+<p>
+    @Html.ActionLink("Nova Empresa", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="form-group">
+
+    @Html.Label("Pesquisar", "Pesquisar")
+    <br />
+
+    <div class="col-md-2">
+        <div id="bloodhound">
+            @Html.TextBox("Consulta", null, new { @class = "form-control typeahead" })
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+    </div>
+</div>
+
+<br /><br />
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeFantasia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RazaoSocial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in ViewBag.PageEmpresas)
+    {
+        <tr>
+            <td>@item.NomeFantasia</td>
+            <td>@item.RazaoSocial</td>
+            <td>@item.Cnpj</td>
+            <td>
+
+                <button onclick="location.href='@Url.Action("Edit", new { id = item.EmpresaId})';return false;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit">
+                        Editar
+                    </span>
+                </button>
+
+
+                <button onclick="location.href='@Url.Action("Details", new { id = item.EmpresaId})';return false;" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign">
+                        Detalhes
+                    </span>
+                </button>
+
+
+
+                <button name="excluir" id=@item.EmpresaId onclick="location.href='@Url.Action("Delete", new { id = item.EmpresaId})';return false;" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash red">
+                        Excluir
+                    </span>
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@Html.PagedListPager((IPagedList)ViewBag.PageEmpresas, page => Url.Action("Index", new { page }))
+

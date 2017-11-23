@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex1EF.Models.Estoque>
+
+@{
+    ViewBag.Title = "Controle de Estoque";
+}
+
+<h2>Controle de Estoque</h2>
+
+<div class="row">
+    <div class="col-lg-4">
+        <p>
+            @Html.ActionLink("Nova Entrada", "Create")
+        </p>
+    </div>
+    <div class="col-lg-6">
+        @using (Html.BeginForm())
+        {
+            @Html.Label("Filtrar Produto: ")
+            @Html.TextBox("consulta");
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        }
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Loja.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loja.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Produto.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.EstoqueId }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.EstoqueId }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.EstoqueId })
+        </td>
+    </tr>
+}
+
+</table>

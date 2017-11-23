@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex7Redis.Models.Banco>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+@{
+    ViewBag.Title = "Listagem de Bancos";
+}
+
+<h2>Listagem de Bancos</h2>
+
+<p>
+    @Html.ActionLink("Novo Banco", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.PageBancos)
+    {
+        <tr>
+            <td>@item.Nome</td>
+            <td>@item.Numero</td>
+            <td>
+
+                <button onclick="location.href='@Url.Action("Edit", new { id = item.BancoId})';return false;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit">
+                        Editar
+                    </span>
+                </button>
+
+
+                <button onclick="location.href='@Url.Action("Details", new { id = item.BancoId})';return false;" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign">
+                        Detalhes
+                    </span>
+                </button>
+
+
+
+                <button name="excluir" id=@item.BancoId onclick="location.href='@Url.Action("Delete", new { id = item.BancoId})';return false;" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash red">
+                        Excluir
+                    </span>
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager((IPagedList)ViewBag.PageBancos, page => Url.Action("Index", new { page }))

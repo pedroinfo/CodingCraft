@@ -1,0 +1,20 @@
+@model EX2.Models.Produto
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<fieldset>
+    <legend>Produto</legend>
+
+    <div class="display-label">Nome</div>
+    <div class="display-field">@Model.Nome</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id=Model.ProdutoId }) |
+    @Html.ActionLink("Voltar", "Indice")
+</p>
+
+

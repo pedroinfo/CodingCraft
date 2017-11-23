@@ -1,0 +1,29 @@
+@model EX2.Models.Cliente
+
+@{
+    ViewBag.Title = "Detalhes";
+}
+
+<h2>Detalhes</h2>
+
+<fieldset>
+    <legend>Cliente</legend>
+
+    <div class="display-label">NomeFantasia</div>
+    <div class="display-field">@Model.NomeFantasia</div>
+
+    <div class="display-label">RazaoSocial</div>
+    <div class="display-field">@Model.RazaoSocial</div>
+
+    <div class="display-label">Cnpj</div>
+    <div class="display-field">@Model.Cnpj</div>
+
+    <div class="display-label">DataAbertura</div>
+    <div class="display-field">@String.Format("{0:g}", Model.DataAbertura)</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id=Model.ClienteId }) |
+    @Html.ActionLink("Voltar", "Indice")
+</p>
+
+

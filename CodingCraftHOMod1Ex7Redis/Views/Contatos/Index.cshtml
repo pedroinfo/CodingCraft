@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex7Redis.Models.Contato>
+
+@{
+    ViewBag.Title = "Listagem de contatos";
+}
+
+<h2>Listagem de contatos</h2>
+
+<p>
+    @Html.ActionLink("Novo Contato", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in ViewBag.PageContatos)
+{
+    <tr>
+        <td>@item.Nome</td>
+        <td>@item.Email</td>
+        <td>
+
+            <button onclick="location.href='@Url.Action("Edit", new { id = item.ContatoId})';return false;" class="btn btn-primary">
+                <span class="glyphicon glyphicon-edit">
+                    Editar
+                </span>
+            </button>
+
+
+            <button onclick="location.href='@Url.Action("Details", new { id = item.ContatoId})';return false;" class="btn btn-info">
+                <span class="glyphicon glyphicon-info-sign">
+                    Detalhes
+                </span>
+            </button>
+
+
+
+            <button name="excluir" id=@item.ContatoId onclick="location.href='@Url.Action("Delete", new { id = item.ContatoId})';return false;" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash red">
+                    Excluir
+                </span>
+            </button>
+        </td>
+    </tr>
+}
+
+</table>

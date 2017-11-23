@@ -1,0 +1,24 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation</title>
+    @Styles.Render("~/foundation/css")
+    
+</head>
+<body>
+
+    <nav class="top-bar top-bar-left">
+        Scaffold - Aula2
+            @Html.Partial("_Menu")
+    </nav>
+    <br />
+    @RenderBody()
+    @Scripts.Render("~/foundation/js")
+    <script>
+        $(document).foundation();
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<IdentityMvc.Models.ViewUser>
+
+@{
+    ViewBag.Title = "Gestão de usuários";
+}
+
+<h2>Gestão de usuários</h2>
+
+<p>
+    @Html.ActionLink("Novo usuário", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Roles)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @foreach (var r in item.Roles)
+            {
+                <span class="label label-primary"> @r </span> @: &nbsp;
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Alterar senha", "ChangePassword", new { id = item.Id }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

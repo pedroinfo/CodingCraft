@@ -1,0 +1,26 @@
+﻿@model CodingCraftHOMod1Ex3Modularizacao.Mvc.Comum.ViewModels.IndexViewModel
+@{
+    ViewBag.Title = "Gerenciar contas de usuário";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Alterar Senha:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Alterar Senha", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </dd>
+    </dl>
+</div>

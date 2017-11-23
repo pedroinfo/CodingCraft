@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex7Redis.Models.Veiculo>
+
+@{
+    ViewBag.Title = "Listagem de veículos";
+}
+
+<h2>Listagem de veículos</h2>
+
+<p>
+    @Html.ActionLink("Novo Contato", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Carro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Placa)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.PageVeiculos)
+    {
+        <tr>
+            <td>@item.Carro</td>
+            <td>@item.Marca</td>
+            <td>@item.Ano</td>
+            <td>@item.Placa</td>
+            <td>
+
+                <button onclick="location.href='@Url.Action("Edit", new { id = item.VeiculoId})';return false;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit">
+                        Editar
+                    </span>
+                </button>
+
+                <button onclick="location.href='@Url.Action("Details", new { id = item.VeiculoId})';return false;" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign">
+                        Detalhes
+                    </span>
+                </button>
+
+                <button name="excluir" id=@item.VeiculoId onclick="location.href='@Url.Action("Delete", new { id = item.VeiculoId})';return false;" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash red">
+                        Excluir
+                    </span>
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

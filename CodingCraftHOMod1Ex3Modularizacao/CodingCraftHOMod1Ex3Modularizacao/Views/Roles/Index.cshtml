@@ -1,0 +1,32 @@
+﻿@model IEnumerable<IdentityMvc.Models.ViewRole>
+
+@{
+    ViewBag.Title = "Grupos";
+}
+
+<h2>Grupos</h2>
+
+<p>
+    @Html.ActionLink("Novo grupo", "Create") | @Html.ActionLink("Lista de usuário","Index","Users")
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
