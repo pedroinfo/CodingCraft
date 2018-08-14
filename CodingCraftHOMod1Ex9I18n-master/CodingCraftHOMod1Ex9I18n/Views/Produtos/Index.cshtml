@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex9I18n.Models.Produto>
+
+@{
+    ViewBag.Title = "[[[Index]]]";
+}
+
+<h2>[[[Index]]]</h2>
+
+<p>
+    @Html.ActionLink("[[[CriarNovo]]]", "[[[Criar]]]")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataUltimaModificacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioUltimaModificacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioCriacao)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataUltimaModificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioUltimaModificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioCriacao)
+            </td>
+            <td>
+                @Html.ActionLink("[[[Editar]]]", "Edit", new { id = item.ProdutoId }) |
+                @Html.ActionLink("[[[Detalhes]]]", "Details", new { id = item.ProdutoId }) |
+                @Html.ActionLink("[[[Excluir]]]", "Delete", new { id = item.ProdutoId })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Livraria .NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.9.0/css/flag-icon.min.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        .row-m-t {
+            margin-top: 10px
+        }
+    </style>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Livraria .NET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="/Home/Index">[[[Home]]]</a></li>
+                    <li><a href="/Loja/Index">[[[Loja]]]</a></li>
+                    <li><a href="/Administracao/Index">[[[Administracao]]]</a></li>
+                    <li><a href="/Home/About">[[[Sobre]]]</a></li>
+                    
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+
+                <select class="selectpicker nav navbar-nav navbar-right row-m-t" name="selectLanguage" data-width="fit">
+                    <option data-content='<span class="flag-icon flag-icon-us"></span> English'>en-us</option>
+                    <option data-content='<span class="flag-icon flag-icon-br"></span> Português'>pt-br </option>
+                </select>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Livraria .NET</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+
+        $(document).ready(function () {
+            getLanguage();
+        })
+
+
+        $(function () {
+            $('.selectpicker').selectpicker();
+        });
+
+        $('select').on('change', function () {
+            changeLang(this.value);
+        })
+
+
+        function changeLang(langSelected) {
+            localStorage.setItem("lang", langSelected)
+         
+            var url = window.location.href;
+            var content = url.split("/");
+            var split = content[3];
+            content[3] = langSelected;
+
+          
+            var redirect = url.replace(split, content[3]);
+            
+
+            window.location.href = redirect;
+        }
+        function getLanguage() {
+            var currentLanguage = localStorage.getItem("lang");
+
+            $('select[name=selectLanguage]').val(currentLanguage);
+            $('.selectpicker').selectpicker('refresh')
+
+        }
+
+    </script>
+</body>
+</html>

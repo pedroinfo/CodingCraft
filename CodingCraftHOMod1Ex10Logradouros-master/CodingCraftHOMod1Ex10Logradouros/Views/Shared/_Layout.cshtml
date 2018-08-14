@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                @Html.ActionLink("Logradouro App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Países", "Index", "Paises", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Estados", "Index", "Estados", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Cidades", "Index", "Cidades", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Bairros", "Index", "Bairros", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Logradouros", "Index", "Logradouros", null, new { @class = "nav-link" })
+            </li>
+        </ul>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+   <script>
+       $(document).ready(function () {
+           var links = $('.container .nav .nav-item a');
+           $.each(links, function (key, va) {
+               if (va.href == document.URL) {
+                   $(this).addClass('active');
+               }
+           });
+       });
+
+    </script>
+</body>
+
+</html>

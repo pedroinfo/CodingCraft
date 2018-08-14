@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex9I18n.Models.Livro>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">[[[TituloLoja]]]</h2>
+  
+
+<hr />
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <div class="card" style="width: 20rem; border:solid thin">
+                <div class="card-title text-center">
+                    <b>@Html.DisplayFor(modelItem => item.Titulo)</b>
+                </div>
+
+                <div class="text-center img-rounded">
+                    @if (item.Imagem != null)
+                    {
+
+                        var base64 = Convert.ToBase64String(item.Imagem);
+                        var source = String.Format("data:image/jpeg;base64,{0}", base64);
+                        <img src="@source" alt="avatar" width="100" height="100" />
+                    }
+                </div>
+                <div class="card-body">
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">[[[Assunto]]]: @Html.DisplayFor(modelItem => item.Assunto)</li>
+                    <li class="list-group-item">[[[Editora]]]: @Html.DisplayFor(modelItem => item.Editora)</li>
+                </ul>
+                <div class="card-body text-center">
+                    <p class="text-success">[[[Preco]]]: <b> @item.Preco</b></p>
+                    <button class="btn btn-success btn-block">[[[Comprar]]]</button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

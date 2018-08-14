@@ -1,0 +1,142 @@
+﻿@model IEnumerable<CodingCraftHOMod1Ex9I18n.Models.Livro>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>[[[Index]]]</h2>
+
+<p>
+    <button 
+            onclick="location.href='@Url.Action("Create", "Livros")';return false;" 
+            class="btn btn-success">
+            <span class="glyphicon glyphicon-ok-sign"></span>
+        [[[Cadastrar]]]
+    </button>
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            [[[Editora]]]
+        </th>
+        <th>
+            [[[Assunto]]]
+        </th>
+        <th>
+            [[[Descricao]]]
+        </th>
+        <th>
+            [[[Preco]]]
+        </th>
+        <th>
+            [[[Imagem]]]
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Editora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Assunto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td align="center">
+
+                
+                @if (item.Imagem != null)
+                {
+
+                    var base64 = Convert.ToBase64String(item.Imagem);
+                    var source = String.Format("data:image/jpeg;base64,{0}", base64);
+
+                    <img src="@source" alt="avatar" width="50" height="50" />
+                }
+            </td>
+            <td style="text-align:center">
+                <button onclick="location.href='@Url.Action("Edit", new { id = item.LivroId })';return false;" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-edit">
+                        [[[Editar]]]
+                    </span>
+                </button>
+
+                <button onclick="location.href='@Url.Action("Details", new { id = item.LivroId })';return false;" class="btn btn-info">
+                    <span class="glyphicon glyphicon-info-sign">
+                        [[[Detalhes]]]
+                    </span>
+                </button>
+
+                <button name="excluir" id=@item.LivroId onclick="excluir(@item.LivroId);" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash red">
+                        [[[Excluir]]]
+                </span>
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+
+
+@section Scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script>
+
+    function excluir(id) {
+        swal({
+            title: "Deseja excluir esse registro?",
+            text: "Essa operação não poderá ser revertida !",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Excluir',
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    swal({
+                        title: 'Excluído!',
+                        text: 'Registro excluído com sucesso !',
+                        type: 'success'
+                    }, function () {
+                        $.ajax({
+                            type: "post",
+                            url: "/Livros/Delete",
+                            data: {
+                                id: id
+                            },
+                            success: function (response) {
+                                location.reload();
+                            }
+                        });
+                    });
+
+                } else {
+                    swal("Cancelado", "Seu arquivo não foi excluído", "error");
+                }
+            });
+
+    }
+</script>
+
+
+
+
+
+    }

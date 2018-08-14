@@ -1,0 +1,17 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-12-12 20:59-06:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: i18n.POTGenerator\n"
+
+#: Models\EntidadeNaoEditavel.cs:9
+msgid "DataCriacao"
+msgstr "Data de Criação"
+
+#: Models\EntidadeNaoEditavel.cs:11
+msgid "UsuarioCriacao"
+msgstr "Usuário de Criação"
+

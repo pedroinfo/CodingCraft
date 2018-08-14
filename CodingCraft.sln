@@ -45,6 +45,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingCraftHOMod1Ex8NuGet",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingCraftHOMod1Ex8NuGetDemonstracao", "CodingCraftHOMod1Ex8\CodingCraftHOMod1Ex8NuGetDemonstracao\CodingCraftHOMod1Ex8NuGetDemonstracao.csproj", "{7BB63090-48BF-4FC5-BCAE-D9E56C2AA698}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingCraftHOMod1Ex8NuGet", "CodingCraftHOMod1Ex8NuGet-master\CodingCraftHOMod1Ex8NuGet\CodingCraftHOMod1Ex8NuGet.csproj", "{62298460-73BC-4BB3-B8C9-A890FBD1F1D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingCraftHOMod1Ex9I18n", "CodingCraftHOMod1Ex9I18n-master\CodingCraftHOMod1Ex9I18n\CodingCraftHOMod1Ex9I18n.csproj", "{8A335898-A717-4429-98DD-9FE4DEDDD1B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingCraftHOMod1Ex10Logradouros", "CodingCraftHOMod1Ex10Logradouros-master\CodingCraftHOMod1Ex10Logradouros\CodingCraftHOMod1Ex10Logradouros.csproj", "{40ACE38D-329A-4233-9913-56EF6DA6466E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +129,18 @@ Global
 		{7BB63090-48BF-4FC5-BCAE-D9E56C2AA698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BB63090-48BF-4FC5-BCAE-D9E56C2AA698}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BB63090-48BF-4FC5-BCAE-D9E56C2AA698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62298460-73BC-4BB3-B8C9-A890FBD1F1D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62298460-73BC-4BB3-B8C9-A890FBD1F1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62298460-73BC-4BB3-B8C9-A890FBD1F1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62298460-73BC-4BB3-B8C9-A890FBD1F1D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A335898-A717-4429-98DD-9FE4DEDDD1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A335898-A717-4429-98DD-9FE4DEDDD1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A335898-A717-4429-98DD-9FE4DEDDD1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A335898-A717-4429-98DD-9FE4DEDDD1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40ACE38D-329A-4233-9913-56EF6DA6466E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40ACE38D-329A-4233-9913-56EF6DA6466E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40ACE38D-329A-4233-9913-56EF6DA6466E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40ACE38D-329A-4233-9913-56EF6DA6466E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

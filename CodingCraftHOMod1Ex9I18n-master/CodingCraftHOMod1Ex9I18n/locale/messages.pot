@@ -1,0 +1,106 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-12-12 21:04-06:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: i18n.POTGenerator\n"
+
+#: Views\Produtos\Index.cshtml:10
+msgid "Criar"
+msgstr "Criar"
+
+#: Views\Produtos\Index.cshtml:10
+msgid "CriarNovo"
+msgstr "Criar Novo"
+
+#: Models\EntidadeNaoEditavel.cs:9
+msgid "DataCriacao"
+msgstr "Data de Criacao"
+
+#: Views\Produtos\Index.cshtml:58
+msgid "Detalhes"
+msgstr "Detalhes"
+
+#: Views\Produtos\Index.cshtml:57
+msgid "Editar"
+msgstr "Editar"
+
+#: Views\Produtos\Index.cshtml:59
+msgid "Excluir"
+msgstr "Excluir"
+
+#: Views\Produtos\Index.cshtml:4
+#: Views\Produtos\Index.cshtml:7
+msgid "Index"
+msgstr "Índice"
+
+#: Models\EntidadeNaoEditavel.cs:11
+msgid "UsuarioCriacao"
+msgstr "Usuário de Criação"
+
+# View\Lojas\Index
+msgid "Assunto"
+msgstr "Assunto";
+
+# View\Lojas\Index
+msgid "Editora"
+msgstr "Editora"
+
+# View\Lojas\Index
+msgid "Comprar"
+msgid "Comprar"
+
+# View\Lojas\Index
+msgid "Preco"
+msgstr "Preço"
+
+
+# View\Lojas\Index
+msgid "TituloLoja"
+msgstr "Livraria .NET"
+
+#titulo
+msgid "Home"
+msgstr "Início"
+
+#tituloLoja
+msgid "Loja"
+msgstr "Loja"
+
+#tituloAdministracao
+msgid "Administracao"
+msgstr "Administração"
+
+#tituloSobre
+msgid "Sobre"
+msgstr "Sobre"
+
+#Descricao
+msgid "Descricao"
+msgstr "Descrição"
+
+#Imagem
+msgid "Imagem"
+msgstr "Imagem"
+
+#Editar
+msgid "Editar"
+msgstr "Editar"
+
+#Detalhes
+msgid "Detalhes"
+msgstr "Detalhes"
+
+#Excluir
+msgid "Excluir"
+msgstr "Excluir"
+
+#Cadastrar
+msgid "Cadastrar"
+msgstr "Cadastrar"
+
+#Sobre
+msgid "Frase"
+msgstr "O melhor lugar para comprar livros"  

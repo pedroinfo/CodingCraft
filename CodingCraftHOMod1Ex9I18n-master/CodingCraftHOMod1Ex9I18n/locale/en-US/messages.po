@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-12-12 21:04-06:00\n"
+"PO-Revision-Date: 2017-12-12 21:04-06:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: i18n.POTGenerator\n"
+
+#: Views\Produtos\Index.cshtml:10
+msgid "Criar"
+msgstr "Create"
+
+#: Views\Produtos\Index.cshtml:10
+msgid "CriarNovo"
+msgstr "Create New"
+
+#: Models\EntidadeNaoEditavel.cs:9
+msgid "DataCriacao"
+msgstr "Created At"
+
+#: Views\Produtos\Index.cshtml:58
+msgid "Detalhes"
+msgstr "Details"
+
+#: Views\Produtos\Index.cshtml:57
+msgid "Editar"
+msgstr "Edit"
+
+#: Views\Produtos\Index.cshtml:59
+msgid "Excluir"
+msgstr "Delete"
+
+#: Views\Produtos\Index.cshtml:4
+#: Views\Produtos\Index.cshtml:7
+msgid "Index"
+msgstr "Index"
+
+#: Models\EntidadeNaoEditavel.cs:11
+msgid "UsuarioCriacao"
+msgstr "Created By"
+
+# View\Lojas\Index
+msgid "Assunto"
+msgstr "Subject";
+
+
+# View\Lojas\Index
+msgid "Editora"
+msgstr "Publishing"
+
+# View\Lojas\Index
+msgid "Comprar"
+msgstr "Buy"
+
+
+# View\Lojas\Index
+msgid "Preco"
+msgstr "Price"
+
+
+# View\Lojas\Index
+msgid "TituloLoja"
+msgstr "BookStore .NET"
+
+#titulo
+msgid "Home"
+msgstr "Home"
+
+#tituloLoja
+msgid "Loja"
+msgstr "Shop"
+
+#tituloAdministracao
+msgid "Administracao"
+msgstr "Manager"
+
+#tituloSobre
+msgid "Sobre"
+msgstr "About"
+
+#Descricao
+msgid "Descricao"
+msgstr "Description"
+
+#Imagem
+msgid "Imagem"
+msgstr "Image"
+
+#Editar
+msgid "Editar"
+msgstr "Edit"
+
+#Detalhes
+msgid "Detalhes"
+msgstr "Details"
+
+#Excluir
+msgid "Excluir"
+msgstr "Delete"
+
+#Cadastrar
+msgid "Cadastrar"
+msgstr "Register"
+
+#SobreFrase
+msgid "Frase"
+msgstr "The best place to buy books" 
