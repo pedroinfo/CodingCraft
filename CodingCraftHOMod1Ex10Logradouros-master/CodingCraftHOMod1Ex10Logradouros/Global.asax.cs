@@ -7,9 +7,10 @@ using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace CodingCraftHOMod1Ex10Logradouros
-{
+{ 
     public class MvcApplication : System.Web.HttpApplication
     {
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
